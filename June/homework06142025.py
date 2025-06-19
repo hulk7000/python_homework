@@ -3,8 +3,6 @@
 #9
 
 def avglist(lst):
-    if not isinstance(lst, list):
-        return "Error: Input is not a list."
     try:
         total = 0
         count = 0
