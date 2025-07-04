@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>互动网页</title>
+</head>
+<body>
+    <h1>请输入你的名字：</h1>
+    <form method="POST">
+        <input type="text" name="username" required>
+        <button type="submit">提交</button>
+    </form>
+
+    {% if name %}
+        <h2>你好，{{ name }}！</h2>
+    {% endif %}
+</body>
+</html>
