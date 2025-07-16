@@ -31,3 +31,4 @@ def select()
     for i in all:
         print(i)
 
+SELECT city, COUNT(*) AS total_people FROM patients GROUP BY city ORDER BY total_people DESC;

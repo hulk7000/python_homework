@@ -1,0 +1,78 @@
+✅ 10个SQL练习题（含关键词）
+练习1：简单 WHERE + ORDER BY
+题目： 查询所有来自 "Hamilton" 的用户，并按照年龄从大到小排序。
+
+ 
+SELECT * FROM users
+WHERE city = 'Hamilton'
+ORDER BY age DESC;
+
+练习2：使用 WHERE AND
+题目： 查询年龄大于25岁，且来自 "Shanghai" 的用户。
+
+ 
+SELECT * FROM users
+WHERE age > 25 AND city = 'Shanghai';
+
+练习3：使用 WHERE OR
+题目： 查询来自 "Hamilton" 或年龄小于20岁的用户。
+
+ 
+SELECT * FROM users
+WHERE city = 'Hamilton' OR age < 20;
+
+练习4：使用 COUNT(*) + GROUP BY
+题目： 查询每个城市的用户数量。
+
+ 
+SELECT city, COUNT(*) AS user_count
+FROM users
+GROUP BY city;
+
+练习5：组合使用 GROUP BY + ORDER BY
+题目： 查询每个城市的用户数量，并按数量从高到低排序。
+
+ 
+SELECT city, COUNT(*) AS user_count
+FROM users
+GROUP BY city
+ORDER BY user_count DESC;
+
+练习6：查询用户订单总数
+题目： 每个城市的人数。
+
+ 
+SELECT user_id, COUNT(*) AS order_count
+FROM orders
+GROUP BY user_id;
+
+练习7：查询特定时间范围的订单
+题目： 查询2004年下半年（2004-07-01 ~ 2024-12-31）内出生的人。
+
+ 
+SELECT * FROM orders
+WHERE order_date BETWEEN '2024-07-01' AND '2024-12-31';
+
+练习8：带有条件统计的查询
+题目： 查询订单金额大于100元的订单数量。
+
+ 
+SELECT COUNT(*) AS big_orders
+FROM orders
+WHERE amount > 100;
+
+练习9：产品分类统计
+题目： 查询每种产品类别下有多少种商品，并按商品数量升序排序。
+
+ 
+SELECT category, COUNT(*) AS product_count
+FROM products
+GROUP BY category
+ORDER BY product_count ASC;
+
+练习10：复杂 WHERE 条件组合
+题目： 查询城市为 "Hamilton" 或 "Shanghai"，且年龄大于30的用户。
+
+ 
+SELECT * FROM users
+WHERE (city = 'Hamilton' OR city = 'Shanghai') AND age > 30;
