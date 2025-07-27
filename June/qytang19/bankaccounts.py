@@ -1,0 +1,39 @@
+import sqlite3
+
+conn = sqlite3.connect('bankaccount.sqlite')
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE bank_accounts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    account_number TEXT UNIQUE NOT NULL,
+    balance REAL NOT NULL,
+    active INTEGER NOT NULL,
+    created_at TEXT NOT NULL
+)
+""")
+
+cursor.executemany("""
+INSERT INTO bank_accounts (name, account_number, balance, active, created_at)
+VALUES (?, ?, ?, ?, ?)
+""", [
+    ('Alice', 'ACC1001', 1523.75, 1, '2023-04-01'),
+    ('Bob', 'ACC1002', 893.50, 1, '2023-04-15'),
+    ('Cathy', 'ACC1003', 3500.00, 1, '2023-05-03'),
+    ('Kim', 'ACC1004', 125.20, 0, '2023-06-12'),
+    ('Eva', 'ACC1005', 780.00, 1, '2023-07-19'),
+    ('Frank', 'ACC1006', 0.00, 0, '2023-08-10'),
+    ('Grace', 'ACC1007', 2499.99, 1, '2023-08-25'),
+    ('Henry', 'ACC1008', 642.40, 1, '2023-09-05'),
+    ('David', 'ACC1009', 99.99, 0, '2023-10-01'),
+    ('Jack', 'ACC1010', 5000.00, 1, '2023-10-15')
+])
+
+cursor.execute("SELECT * FROM bank_accounts WHERE active = 1")
+results = cursor.fetchall()
+for row in results:
+    print(row)
+
+conn.commit()
+conn.close()
