@@ -9,7 +9,7 @@ def main():
         print("5. check status up from vlan")
         print("6. check status from ip")
         print("7. exit")
-        choice = input("请输入选项编号（1-6）：").strip()
+        choice = input("input from（1-6）：").strip()
 
         if choice == "1":
             showallinfo()
@@ -21,14 +21,15 @@ def main():
         elif choice == "4":
             checkip()
         elif choice == "5":
-            showalllanguage()
+            vlan = input('plz enter vlan :').strip()
+            checkvlanup(vlan)
         elif choice == "6":
-
+            checkstatus()
         elif choice == "7":
             print("exit")
             break
         else:
-            print("无效的选项，请重新输入。")
+            print("invalid choice")
 
 if __name__ == "__main__":
     main()

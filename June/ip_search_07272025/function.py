@@ -65,11 +65,11 @@ def checkstatusdown():
 # checkstatusdown()
 
 def checkvlanup(vlan):
-    print(f"{vlan} status up as below")              # finish 4
+    print(f"{vlan} status up as below")    # finish 4
     count = 0
     for item in re_all_list:
         if item[0] == vlan and item[2] == 'up':
             count=count+1
             print(f"{item[0]} IP: {item[1]}     status: {item[2]}")
     print(f"total of {count} {vlan} is up")
-# checkvlanup('vlan10')
+checkvlanup('vlan10')
