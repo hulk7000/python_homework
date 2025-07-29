@@ -14,15 +14,13 @@ def main():
         if choice == "1":
             showallinfo()
         elif choice == "2":
-            vlan = input("search from vlan：").strip()
-            showvlan(vlan)
+            showvlan()
         elif choice == "3":
             checkstatusdown()
         elif choice == "4":
             checkip()
         elif choice == "5":
-            vlan = input('plz enter vlan :').strip()
-            checkvlanup(vlan)
+            checkvlanup()
         elif choice == "6":
             checkstatus()
         elif choice == "7":
