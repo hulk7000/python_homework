@@ -1,4 +1,4 @@
-from function3 import *
+from function4 import *
 def main():
     while True:
         print("\n📋 enter a number：")
@@ -28,5 +28,6 @@ def main():
             break
         else:
             print('invalid input')
+
 if __name__ == '__main__':
     main()

@@ -23,7 +23,7 @@ re_all_list = re.findall(r'(vlan\d+)\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+YE
 def is_valid_vlan():
     pattern = r'^vlan(?:[1-9]|[1-9]\d{1,2}|[1-3]\d{3}|40[0-8][0-9]|409[0-6])$'
     while True:
-        vlan = input("Enter an vlan to check: ").strip()
+        vlan = input('Enter an vlan to check: ').strip()
         if re.match(pattern, vlan):
             break
     return vlan
@@ -82,7 +82,7 @@ def showvlan():
     vlan = is_valid_vlan()
     count = 0
     for item in re_all_list:
-        if item[0] == vlan:
+        if item[1] == vlan:
             count += 1
             print(f'VLAN {item[0]} IP {item[1]} Status: {item[2]}')
     print(f'total of {count} {vlan}')
