@@ -1,4 +1,4 @@
-from dic import *
+from lib.dic import employee_data, erp_data, game_data, school_data, logistics_data
 
 def q1():
     a = employee_data.get('employees')[0].get('projects')[1].get('name')

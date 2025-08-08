@@ -1,9 +1,10 @@
-from dic import *
+from lib.libdic import *
 
 def q1():
     a = employee_data.get('employees')[0].get('projects')[1].get('name')
     print(a)
 #5
+q1()
 
 def q2():
     b = erp_data.get('orders')[0].get('products')[0]
