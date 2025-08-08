@@ -11,23 +11,22 @@ def main():
         print("7. exit")
         choice = input("input from（1-7）：").strip()
 
-        if choice == "1":
+        if choice == '1':
             showallinfo()
-        elif choice == "2":
+        elif choice == '2':
             showvlan()
-        elif choice == "3":
+        elif choice == '3':
             checkstatusdown()
-        elif choice == "4":
+        elif choice == '4':
             checkip()
-        elif choice == "5":
+        elif choice == '5':
             checkvlanup()
-        elif choice == "6":
+        elif choice == '6':
             checkstatus()
-        elif choice == "7":
+        elif choice == '7':
             print("exit")
             break
         else:
             print('invalid input')
-
 if __name__ == '__main__':
     main()

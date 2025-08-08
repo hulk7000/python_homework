@@ -49,7 +49,7 @@ def is_valid_ip():
 def checkstatus():
     user_ip = is_valid_ip()
     if user_ip in re_all_list:
-        print(re_all_list[2])
+        print(re_all_list)
     ipin = 0
     for i in re_all_list:
         if user_ip == i[1]:
@@ -82,7 +82,7 @@ def showvlan():
     vlan = is_valid_vlan()
     count = 0
     for item in re_all_list:
-        if item[1] == vlan:
+        if item[0] == vlan:
             count += 1
             print(f'VLAN {item[0]} IP {item[1]} Status: {item[2]}')
     print(f'total of {count} {vlan}')
@@ -106,4 +106,4 @@ def checkvlanup():
             count += 1
             print(f'VLAN {item[0]} IP {item[1]} Status: {item[2]}')
     print(f'total of {count} {vlan} is up')
-# checkvlanup()
+# checkstatus()
