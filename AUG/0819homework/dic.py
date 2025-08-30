@@ -1,4 +1,4 @@
-def star(row=9,printnum=0):
+def star(row=0,printnum=0):
     count = 0
     for i in range(row):
         for j in range(i):
