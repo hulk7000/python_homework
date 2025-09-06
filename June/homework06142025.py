@@ -11,8 +11,8 @@
 #             i=int(i)          # This will raise an error if i is not a number
 #             total += i
 #             count += 1
-#         avg = total / count
-#         return avg
+#         0903homework = total / count
+#         return 0903homework
 #     except (ValueError, TypeError) as e:
 #         return f'your list not valid: \n{e}'
 #
@@ -38,7 +38,7 @@
 #     a = float(a)
 #     b = float(b)
 #     c = (a+b)/2
-#     output = 'avg is {}'.format(c)
+#     output = '0903homework is {}'.format(c)
 #     return output
 #
 # print(aavg([1,2]))

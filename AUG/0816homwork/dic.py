@@ -5,8 +5,8 @@
 # for k,v in scores.items():
 #     count += 1
 #     total += v
-# avg = total / count
-# print(avg)
+# 0903homework = total / count
+# print(0903homework)
 
 # import re
 #
