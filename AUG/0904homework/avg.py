@@ -34,9 +34,7 @@ word = re.findall(r'\b\w+\b', sentence)
 print(word)
 result = []
 for i in word:
-    print(f'i = {i}')
     for j in word:
-        print(f' --j = {j}')
         count = 0
         if i == j:
             count = count + 1
