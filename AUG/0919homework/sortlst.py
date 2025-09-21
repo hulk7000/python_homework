@@ -5,8 +5,8 @@ def sortlst(lst):
     for i in range(len(lst)):
         for j in range(0, len(lst) - i - 1):
             if lst[j] > lst[j + 1]:
-                print(f'{lst[j]} , {lst[j+1]}',end=' ')
-                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                print(f'{lst[j]} , {lst[j+1]}', end=' ')
+                lst[j], lst[j+1] = lst[j+1], lst[j]
                 total += 1
                 print(f'changed to : {lst[j]}, {lst[j+1]}')
     print(f'total times {total}')
