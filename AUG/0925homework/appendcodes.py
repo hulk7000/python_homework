@@ -1,4 +1,3 @@
-
 def ins_dic(dic,val):
     from collections import OrderedDict
     od = OrderedDict()
@@ -7,12 +6,11 @@ def ins_dic(dic,val):
     dic.update(dict(od))
     return dic
 
-
 # lst1=["a","b","c","d","apple","apple","apple","apple","apple","apple","apple","apple","apple","apple","apple","apple","apple","apple",]
-dic={}
+dic = {}
 
-for i in range(1000):
-    newdic= ins_dic(dic, "apple")
+for i in range(10):
+    newdic = ins_dic(dic, "apple")
     dic.update(newdic)
 print(dic)
 
