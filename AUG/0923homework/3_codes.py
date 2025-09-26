@@ -1,13 +1,11 @@
-lst1  = [1,3,5]
-tple1 = (1,3,5)
-lst1[0] =10
-lst1.extend(tple1)
-print(lst1)
-
-
-
-
-
+string = [1,2,3,3,4,4,43,53,1]
+def reverse(lst):
+    result = []
+    for i in lst:
+        result.insert(0, i)
+    print(result)
+    return result
+# reverse(string)
 
 origin_list = [5, 9, 3, 77, 2, 6, 99, 8, 21, 6, 4]
 
@@ -23,14 +21,11 @@ def sortlst(lst):
     print(f'total times {total}')
     return lst
 
-# print(sortlst(origin_list))
+print(sortlst(origin_list))
 
-nums = [0,0,1,1,1,2,2,3,3,4]
+def reverse_sort(lst):
+    for i in range(len(lst)):
+        j = len(lst) - i - 1
+        print(lst[j])
 
-def removedup(lst):
-    result = []
-    for i in lst:
-        if i not in result:
-            result.append(i)
-    return result
-# print(removedup(nums))
+# reverse_sort(origin_list)
