@@ -17,6 +17,6 @@ print(f'list nums : {nums}')
 # print(rd(nums))
 
 def rd(lst):
-    return list(set(lst))
-
+    setnums = list(set(lst))
+    return setnums
 print(rd(nums))
