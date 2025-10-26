@@ -36,7 +36,7 @@ class MessageLogger:
 
 
 if __name__ == "__main__":
-    m = MessageLogger("hi")
-    m.log()
-    m.log()
+    m = MessageLogger("10252025")
+    # m.log()
+    m.deletelog(10)
     print(m)
