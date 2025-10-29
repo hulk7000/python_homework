@@ -8,3 +8,5 @@ class MessageLog(Base):
     __tablename__ = 'message_logs'
     id = Column(Integer, primary_key=True)
     message = Column(String, nullable=False)
+    # name =Column(String, nullable=False)
+    # password = Column(String, nullable=False)
