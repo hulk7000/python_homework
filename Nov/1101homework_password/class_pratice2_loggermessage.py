@@ -69,7 +69,7 @@ def deleteid(id):
         print(f"❌ 未找到 ID={id} 的记录")
 
 if __name__ == "__main__":
-    # m = PasswdMgmt("twitter_account","mange","9999")
+    m = PasswdMgmt("sina_blog","maggie123","123456")
     # m.add_info()
     # showid()
     # deleteid(3)
