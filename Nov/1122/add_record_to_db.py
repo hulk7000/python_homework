@@ -14,13 +14,13 @@ class Record_game:
     def __init__(self,play_name,tries):
         self.play_name = play_name
         self.tries = tries
-        # self.created_at = created_at
+
 
     def add_record(self):
         entry = Guess_game(
             play_name=self.play_name,
             tries=self.tries,
-            # created_at=self.created_at
+
         )
         session.add(entry)
         session.commit()
