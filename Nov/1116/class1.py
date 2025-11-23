@@ -23,3 +23,4 @@ if __name__ == '__main__':
     # print('this is class person')
     bob = Person('Bob Smith',42,30000,'writing')
     sue = Person('Sue Jones',45,40000,'drawing')
+
