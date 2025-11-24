@@ -10,4 +10,4 @@ class Guess_game(Base):
     play_name = Column(String, nullable=False)
     tries = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=datetime.now)
-
+    input_info = Column(Integer)
