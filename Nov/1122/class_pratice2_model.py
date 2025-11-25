@@ -1,13 +1,18 @@
-# models.py
-from sqlalchemy import Column, Integer, String,DateTime
 from sqlalchemy.orm import declarative_base
-from datetime import datetime
+from sqlalchemy import Column, Integer, String
+
 Base = declarative_base()
 
 class Guess_game(Base):
-    __tablename__ = 'game_record'
+    __tablename__ = "guess_game"
+    id = Column(Integer, primary_key=True)
+    play_name = Column(String)
+    tries = Column(String)
+    input_info = Column(String)
+
+class Message(Base):
+    __tablename__ = "messages"
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    play_name = Column(String, nullable=False)
-    tries = Column(Integer, nullable=False)
-    created_at = Column(DateTime, default=datetime.now)
-    input_info = Column(Integer)
+    category = Column(String, nullable=False)
+    content = Column(String, nullable=False)
