@@ -6,7 +6,7 @@ import os
 db_path = os.path.join(os.path.dirname(__file__), 'guessgame.db')
 
 # Create engine
-engine = create_engine(f'sqlite:///{db_path}', echo=True)
+engine = create_engine(f'sqlite:///{db_path}', echo=False)
 
 # Function to create all tables from Base
 def create_all_tables():

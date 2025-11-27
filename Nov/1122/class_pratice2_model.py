@@ -37,3 +37,14 @@ class Speed_type(Base):
     typed_word = Column(String, nullable=False)
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Horse_game(Base):
+    __tablename__ = "horse_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    winner_house = Column(String, nullable=False)
+    winner_house_time = Column(Float, nullable=False)
+    rankings = Column(String, nullable=False)
+    race_info = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)
