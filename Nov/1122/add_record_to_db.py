@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type
+from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game
 import os
 import json
 
@@ -79,12 +79,41 @@ class Type_record:
         session.add(record)
         session.commit()
 
+class Horse_record:
+    def __init__(self, player_name,bet_amount,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
 
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Horse_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
 if __name__ == "__main__":
-
-    input_info_json = json.dumps([1, 8, 9])
-    m = Record_game("frank_demo_test_insert_db", "9999", input_info_json)
-    m.add_record()
-
-    msg = Add_message('k','message')
-    msg.add_content()
+    pass
+    # input_info_json = json.dumps([1, 8, 9])
+    # m = Record_game("frank_demo_test_insert_db", "9999", input_info_json)
+    # m.add_record()
+    #
+    # msg = Add_message('k','message')
+    # msg.add_content()
+    # Horse_record("1","4","1","1","finish").add_info()

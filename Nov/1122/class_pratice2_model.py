@@ -42,6 +42,11 @@ class Horse_game(Base):
     __tablename__ = "horse_game"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(String, nullable=False)
+    horse_choice = Column(String, nullable=False)
+    win_amount = Column(String, nullable=False)
+
     winner_house = Column(String, nullable=False)
     winner_house_time = Column(Float, nullable=False)
     rankings = Column(String, nullable=False)
