@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from class_pratice2_model import Base, Guess_game
+from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type
 import os
 import json
 
@@ -29,25 +29,62 @@ class Record_game:
         print(f"✅ 已添加到数据库: {self.play_name} ({self.tries}) {self.input_info}")
 
 
-class Message_table(Base):
-    __tablename__ = "message_table"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    content = Column(String, nullable=False)
-
-    def __init__(self, content):
+class Add_message:
+    def __init__(self, category, content):
+        self.category = category
         self.content = content
 
-    def add(self):
-        session.add(self)
+
+    def add_content(self):
+        entry = Message(
+            category=self.category,
+            content=self.content,
+        )
+
+        session.add(entry)
         session.commit()
-        print("Message added:", self.content)
+        print(f"Message added:, {self.category},{self.content}")
+
+class RPS_record_game:
+    def __init__(self, bot, player, result):
+        self.bot = bot
+        self.player = player
+        self.result = result
+
+    def add_info(self):
+        entry = Rock_paper_scissors(
+            bot=self.bot,
+            player=self.player,
+            result=self.result,
+        )
+
+        session.add(entry)
+        session.commit()
+        print(f"info added:, {self.bot},{self.player}")
+
+class Type_record:
+    def __init__(self, username, time_taken, typed_word, status):
+        self.username = username
+        self.time_taken = time_taken
+        self.typed_word = typed_word
+        self.status = status
+
+    def add_info(self):
+        record = Speed_type(
+            username=self.username,
+            time_taken=self.time_taken,
+            typed_word=self.typed_word,
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
 
 
 if __name__ == "__main__":
+
     input_info_json = json.dumps([1, 8, 9])
     m = Record_game("frank_demo_test_insert_db", "9999", input_info_json)
     m.add_record()
 
-    msg = Message_table("Hello message")
-    msg.add()
+    msg = Add_message('k','message')
+    msg.add_content()

@@ -2,71 +2,19 @@ import os
 import random
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base
-from message_dic import message_dic
+from class_pratice2_model import Guess_game, Message
 
 # -----------------------------
 # Database setup
 # -----------------------------
 db_path = os.path.join(os.path.dirname(__file__), 'guessgame.db')
-engine = create_engine(f"sqlite:///{db_path}", echo=False)
+engine = create_engine(f'sqlite:///{db_path}', echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
 
 # -----------------------------
-# Guess game record table
-# -----------------------------
-class Guess_game(Base):
-    __tablename__ = "guess_game"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    play_name = Column(String, nullable=False)
-    tries = Column(Integer, nullable=False)
-    input_info = Column(String, nullable=False)
-
-# -----------------------------
-# Messages table
-# -----------------------------
-class Message(Base):
-    __tablename__ = "messages"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    category = Column(String, nullable=False)
-    content = Column(String, nullable=False)
-
-    @staticmethod
-    def add_message(category, content):
-        exists = session.query(Message).filter(
-            Message.category == category,
-            Message.content == content
-        ).first()
-        if not exists:
-            entry = Message(category=category, content=content)
-            session.add(entry)
-            session.commit()
-
-# -----------------------------
-# Create tables if missing
-# -----------------------------
-Base.metadata.create_all(engine)
-
-# -----------------------------
-# Populate messages from message_dic
-# -----------------------------
-for category, messages in message_dic.items():
-    for msg in messages:
-        Message.add_message(category, msg)
-
-print("🎉 All messages have been saved to the database!")
-
-# -----------------------------
-# Helper to get messages
-# -----------------------------
-def get_messages(category):
-    """Return list of messages for category from DB."""
-    db_msgs = [m[0] for m in session.query(Message.content).filter(Message.category == category).all()]
-    return db_msgs
-
-# -----------------------------
-# Record game class
+# Game record class
 # -----------------------------
 class Record_game:
     def __init__(self, play_name, tries, input_info):
@@ -75,6 +23,7 @@ class Record_game:
         self.input_info = input_info
 
     def add_record(self):
+        """Add a player's game record to the database."""
         entry = Guess_game(
             play_name=self.play_name,
             tries=self.tries,
@@ -85,7 +34,30 @@ class Record_game:
         print(f"✅ Added game record: {self.play_name} ({self.tries}) {self.input_info}")
 
 # -----------------------------
-# Helper to get user input
+# Messages helper function
+# -----------------------------
+def add_message(category, content):
+    """Add a message to the database."""
+    entry = Message(category=category, content=content)
+    session.add(entry)
+    session.commit()
+    print(f"✅ Saved message: [{category}] {content}")
+
+# -----------------------------
+# Create tables
+# -----------------------------
+Base.metadata.create_all(engine)
+
+# -----------------------------
+# Get messages directly from DB
+# -----------------------------
+def get_messages(category):
+    """Fetch all messages for a given category from the database."""
+    messages = session.query(Message.content).filter(Message.category == category).all()
+    return [m[0] for m in messages]  # extract strings from tuples
+
+# -----------------------------
+# Guessing game helpers
 # -----------------------------
 def get_number(prompt):
     while True:
@@ -101,15 +73,24 @@ def get_number(prompt):
         return int(ans)
 
 # -----------------------------
-# Main guessing game
+# Main guessing game logic
 # -----------------------------
 def play_game():
-    print(random.choice(get_messages("greetings")))
-    print(random.choice(get_messages("start_message")))
+    greetings = get_messages("greetings")
+    start_messages = get_messages("start_message")
+    hints_low = get_messages("hints_low")
+    hints_high = get_messages("hints_high")
+    win_messages = get_messages("win_messages")
 
-    username = input("Enter your username: ")
+    if not (greetings and start_messages and hints_low and hints_high and win_messages):
+        print("⚠️ Some message categories are empty. Please populate the database first!")
+        return
+
+    print(random.choice(greetings))
+    print(random.choice(start_messages))
+
+    username = input("Please enter your username: ")
     secret_number = random.randint(1, 100)
-
     guess = 0
     guess_count = 0
     guess_list = []
@@ -124,21 +105,22 @@ def play_game():
         guess_list.append(guess)
 
         if guess < secret_number:
-            print(random.choice(get_messages("hints_low")))
+            print(random.choice(hints_low))
         elif guess > secret_number:
-            print(random.choice(get_messages("hints_high")))
+            print(random.choice(hints_high))
 
-    print(random.choice(get_messages("win_messages")))
+    print(random.choice(win_messages))
     print(f"The secret number was: {secret_number}")
     print(f"{username} guessed it in {guess_count} tries! 🎯")
     print("Your guesses:", guess_list)
 
-    # Save the game record
+    # Save game record
     record = Record_game(username, guess_count, str(guess_list))
     record.add_record()
+    return
+# -----------------------------
+# Run the game
+# -----------------------------
 
-# -----------------------------
-# Run game
-# -----------------------------
-if __name__ == "__main__":
-    play_game()
+if __name__ == '__main__':
+    print("hulk is lazy")
