@@ -46,10 +46,27 @@ class Horse_game(Base):
     bet_amount = Column(String, nullable=False)
     horse_choice = Column(String, nullable=False)
     win_amount = Column(String, nullable=False)
-
     winner_house = Column(String, nullable=False)
     winner_house_time = Column(Float, nullable=False)
     rankings = Column(String, nullable=False)
     race_info = Column(String, nullable=False)
     status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)
+
+from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+from datetime import datetime
+
+Base = declarative_base()
+
+class Car_game(Base):
+    __tablename__ = 'Car_game'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    words_spelled = Column(String, nullable=False)
+    all_words = Column(String, nullable=False)
+    error_count = Column(Integer, nullable=False)
+    time_taken = Column(Float, nullable=False)
     created_time = Column(DateTime, default=datetime.now)

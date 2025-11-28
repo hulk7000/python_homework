@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game
+from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game, Car_game
 import os
 import json
 
@@ -108,6 +108,22 @@ class Horse_record:
         )
         session.add(record)
         session.commit()
+
+    class Car_record:
+        def __init__(self, player_name, status, words_spelled):
+            self.player_name = player_name
+            self.status = status
+            self.words_spelled = words_spelled
+
+        def add_info(self):
+            record = Car_game(
+                player_name=self.player_name,
+                status = self.status,
+                words_spelled = self.words_spelled
+            )
+            session.add(record)
+            session.commit()
+
 if __name__ == "__main__":
     pass
     # input_info_json = json.dumps([1, 8, 9])

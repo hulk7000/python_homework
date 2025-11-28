@@ -2,37 +2,35 @@ from play_guess_game import *  # Assuming play_game() is defined here
 from rock_paper_scissor_game import *  # Assuming play_rps() is defined here
 from speed_type import *
 import play_house_game
+from car_race_game import *  # <-- import your car game here
 
 def display_menu():
-    while True:  # Keep showing the menu in a loop until the user exits
-        # Display the main menu options
+    while True:
         print("\n--- Main Menu ---")
         print("1. Play guess game")
-        print("2. Play rock paper scissors game")  # Assuming you have a guessing game here
-        print("3. Play speed type game")  # You can implement this to view past results
-        print("4. Play horse game")  # You can implement this to view past results
-
+        print("2. Play rock paper scissors game")
+        print("3. Play speed type game")
+        print("4. Play horse game")
+        print("5. Play car spelling race game")  # <-- added option
         print("0. Exit")
 
-        # Get user choice
-        choice = input("Choose an option (1/2/3/4): ")
+        choice = input("Choose an option (1/2/3/4/5): ")
 
-        # Handle the user's choice
         if choice == "1":
-            play_game()  # Call the function to play Rock-Paper-Scissors
+            play_game()  # Guess game
         elif choice == "2":
-            play_rps()  # Call the function to play another game (e.g., guessing game)
+            play_rps()  # Rock-paper-scissors
         elif choice == "3":
-            play_speed_typing()
-            # Implement the functionality to view previous results if necessary
+            play_speed_typing()  # Speed typing game
         elif choice == "4":
-            play_house_game.horse_main()
+            play_house_game.horse_main()  # Horse game
+        elif choice == "5":
+            car_game_main()  # Car spelling race game
         elif choice == "0":
             print("Exiting the game. Goodbye!")
-            break  # Exit the loop and end the program
+            break
         else:
             print("Invalid choice! Please select a valid option.")
 
-# Ensure this function is called when the script is executed
 if __name__ == "__main__":
-    display_menu()  # This will display the menu when the script starts
+    display_menu()
