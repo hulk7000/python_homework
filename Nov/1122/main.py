@@ -2,7 +2,7 @@ from play_guess_game import *  # Assuming play_game() is defined here
 from rock_paper_scissor_game import *  # Assuming play_rps() is defined here
 from speed_type import *
 import play_house_game
-from car_race_game import *  # <-- import your car game here
+from car_game import *  # <-- import your car game here
 
 def display_menu():
     while True:
@@ -25,7 +25,7 @@ def display_menu():
         elif choice == "4":
             play_house_game.horse_main()  # Horse game
         elif choice == "5":
-            play_car_game()  # Car spelling race game
+            car_main()  # Car spelling race game
         elif choice == "0":
             print("Exiting the game. Goodbye!")
             break

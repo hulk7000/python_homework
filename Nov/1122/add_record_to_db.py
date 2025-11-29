@@ -81,7 +81,6 @@ class Type_record:
 
 class Horse_record:
     def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
-
         self.player_name = player_name
         self.bet_amount = bet_amount
         self.balance = balance
@@ -111,7 +110,6 @@ class Horse_record:
 
     @staticmethod
     def get_latest_balance(username):
-        from sqlalchemy import desc
 
         last_record = (
             session.query(Horse_game)
@@ -125,29 +123,49 @@ class Horse_record:
 
 
 class Car_record:
-    def __init__(self, player_name, status, words_spelled, all_words, error_count, time_taken):
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
         self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
         self.status = status
-        self.words_spelled = words_spelled
-        self.all_words = all_words
-        self.error_count = error_count
-        self.time_taken = time_taken
 
     def add_info(self):
         record = Car_game(
-            player_name=self.player_name,
-            status = self.status,
-            words_spelled = self.words_spelled,             # 改这里
-            all_words = self.all_words,                     # 改这里
-            error_count = self.error_count,                 # 2
-            time_taken = self.time_taken                    # ??
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
         )
         session.add(record)
         session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Car_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Car_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
 
 if __name__ == "__main__":
-    # Car_record('Hulk','win','Abc','Abc','123',10.34).add_info()
-    latest = Horse_record.get_latest_balance("hulk")
+    # Car_record('tester','win',1000,'Abc','123',10.34,'2','2','3','3').add_info()
+    latest = Car_record.get_latest_balance("tester")
     print(latest)
     # Horse_record('1','2',3,'4','5','6',7.2,'8','8','9').add_info()
     pass
