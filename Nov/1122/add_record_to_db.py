@@ -109,22 +109,29 @@ class Horse_record:
         session.add(record)
         session.commit()
 
-    class Car_record:
-        def __init__(self, player_name, status, words_spelled):
-            self.player_name = player_name
-            self.status = status
-            self.words_spelled = words_spelled
+class Car_record:
+    def __init__(self, player_name, status, words_spelled, all_words, error_count, time_taken):
+        self.player_name = player_name
+        self.status = status
+        self.words_spelled = words_spelled
+        self.all_words = all_words
+        self.error_count = error_count
+        self.time_taken = time_taken
 
-        def add_info(self):
-            record = Car_game(
-                player_name=self.player_name,
-                status = self.status,
-                words_spelled = self.words_spelled
-            )
-            session.add(record)
-            session.commit()
+    def add_info(self):
+        record = Car_game(
+            player_name=self.player_name,
+            status = self.status,
+            words_spelled = self.words_spelled,             # 改这里
+            all_words = self.all_words,                     # 改这里
+            error_count = self.error_count,                 # 2
+            time_taken = self.time_taken                    # ??
+        )
+        session.add(record)
+        session.commit()
 
 if __name__ == "__main__":
+    # Car_record('Hulk','win','Abc','Abc','123',10.34).add_info()
     pass
     # input_info_json = json.dumps([1, 8, 9])
     # m = Record_game("frank_demo_test_insert_db", "9999", input_info_json)

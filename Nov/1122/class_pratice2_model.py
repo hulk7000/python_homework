@@ -53,12 +53,6 @@ class Horse_game(Base):
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
 
-from sqlalchemy import Column, Integer, String, Float, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
-
-Base = declarative_base()
-
 class Car_game(Base):
     __tablename__ = 'Car_game'
 

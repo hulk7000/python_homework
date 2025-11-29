@@ -25,7 +25,7 @@ def display_menu():
         elif choice == "4":
             play_house_game.horse_main()  # Horse game
         elif choice == "5":
-            car_game_main()  # Car spelling race game
+            play_car_game()  # Car spelling race game
         elif choice == "0":
             print("Exiting the game. Goodbye!")
             break

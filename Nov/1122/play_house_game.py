@@ -22,7 +22,7 @@ def generate_times(num, total=30):
     game_info = list(zip(range(1, num + 1), arr2))  # 每匹马编号从1开始
     return arr2, game_info
 
-def render_bar(p, bar_len=80):
+def render_bar(p, bar_len=100):
     """
     绘制赛马进度条
     p: 进度百分比（0~1）
