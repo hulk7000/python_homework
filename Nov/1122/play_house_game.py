@@ -138,6 +138,7 @@ def horse_main():
     # 玩家下注
     player_name, bet_amount, horse_choice = horse_bet(num_horses)
 
+
     # 生成赛程时间和信息
     race_times, game_info = generate_times(num_horses)
 
@@ -153,8 +154,11 @@ def horse_main():
     winner_house_time = rankings[0][1]
     ranking_list = [horse for horse, _ in rankings]  # <-- 新增这一行
 
-    # 保存记录
-    Horse_record(player_name,bet_amount, horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
+    before_balance = Horse_record.get_latest_balance(player_name)
+    balance = before_balance + win_amount
+    print(f"{player_name} balance : {balance}")
+    # 保存记录                          balance
+    Horse_record(player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
 
 if __name__ == "__main__":
     horse_main()

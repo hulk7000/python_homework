@@ -57,8 +57,9 @@ message_dic = {
         "🐱‍🏍 Boom! You win!"
     ]
 }
-for k, v in message_dic.items():
-    for i, message in enumerate(v):  # 遍历每个列表元素，i 是索引，message 是内容
-        print(f"{k}, {message}")  # 打印键和值
-        msg = Add_message(k, message)
-        msg.add_content()
+if __name__ == '__main__':
+    for k, v in message_dic.items():
+        for i, message in enumerate(v):  # 遍历每个列表元素，i 是索引，message 是内容
+            print(f"{k}, {message}")  # 打印键和值
+            msg = Add_message(k, message)
+            msg.add_content()

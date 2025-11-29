@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String , desc
 from sqlalchemy.orm import sessionmaker
 from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game, Car_game
 import os
@@ -80,13 +80,13 @@ class Type_record:
         session.commit()
 
 class Horse_record:
-    def __init__(self, player_name,bet_amount,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
 
         self.player_name = player_name
         self.bet_amount = bet_amount
+        self.balance = balance
         self.horse_choice = horse_choice
         self.win_amount = win_amount
-
         self.winner_house = winner_house
         self.winner_house_time = winner_house_time
         self.rankings = rankings
@@ -97,9 +97,9 @@ class Horse_record:
         record = Horse_game(
             player_name =self.player_name,
             bet_amount=self.bet_amount,
+            balance=self.balance,
             horse_choice=self.horse_choice,
             win_amount=self.win_amount,
-
             winner_house=self.winner_house,
             winner_house_time=self.winner_house_time,
             rankings=json.dumps(self.rankings),  # 改这里
@@ -108,6 +108,21 @@ class Horse_record:
         )
         session.add(record)
         session.commit()
+
+    @staticmethod
+    def get_latest_balance(username):
+        from sqlalchemy import desc
+
+        last_record = (
+            session.query(Horse_game)
+            .filter_by(player_name=username)
+            .order_by(desc(Horse_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
 
 class Car_record:
     def __init__(self, player_name, status, words_spelled, all_words, error_count, time_taken):
@@ -132,6 +147,9 @@ class Car_record:
 
 if __name__ == "__main__":
     # Car_record('Hulk','win','Abc','Abc','123',10.34).add_info()
+    latest = Horse_record.get_latest_balance("hulk")
+    print(latest)
+    # Horse_record('1','2',3,'4','5','6',7.2,'8','8','9').add_info()
     pass
     # input_info_json = json.dumps([1, 8, 9])
     # m = Record_game("frank_demo_test_insert_db", "9999", input_info_json)
