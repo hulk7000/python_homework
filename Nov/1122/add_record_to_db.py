@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String , desc
 from sqlalchemy.orm import sessionmaker
-from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game, Car_game
+from class_pratice2_model import Base, Guess_game, Message, Rock_paper_scissors, Speed_type,Horse_game, Car_game, Truck_game,Van_game,Turtle_game
 import os
 import json
 
@@ -162,11 +162,130 @@ class Car_record:
             return last_record.balance
         return 0  # 默认余额为 0
 
+class Truck_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Truck_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Truck_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Truck_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
+class Van_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Van_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Van_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Van_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
+class Turtle_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Turtle_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Turtle_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Turtle_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
 
 if __name__ == "__main__":
-    # Car_record('tester','win',1000,'Abc','123',10.34,'2','2','3','3').add_info()
-    latest = Car_record.get_latest_balance("tester")
-    print(latest)
+    # Truck_record('tester','win',1000,'Abc','123',10.34,'2','2','3','3').add_info()
+    # latest = Truck_record.get_latest_balance("tester")
+    # print(latest)
     # Horse_record('1','2',3,'4','5','6',7.2,'8','8','9').add_info()
     pass
     # input_info_json = json.dumps([1, 8, 9])

@@ -2,7 +2,8 @@ import time
 import random
 import sys
 from colorama import init
-from add_record_to_db import Car_record
+from add_record_to_db import *
+from class_pratice2_model import *
 import json
 from datetime import datetime
 
@@ -29,7 +30,7 @@ def render_bar(p, bar_len=100):
     bar_len: 条长度
     """
     filled = int(p * bar_len)
-    return "-" * (bar_len - filled) + "🏎️" + "=" * filled
+    return "-" * (bar_len - filled) + "🚐" + "=" * filled
 
 def race_animation(num_horses, CIRCLE, race_times):
     """
@@ -78,7 +79,7 @@ def race_animation(num_horses, CIRCLE, race_times):
     print(f"\n🏆 胜者：{CIRCLE[winner-1]}")
     return winner
 
-def car_bet(num_horses):
+def van_bet(num_horses):
     """
     获取玩家下注信息
     返回：
@@ -129,15 +130,14 @@ def race_result(player_name, bet_amount, horse_choice, winner):
     print(f"{player_name} You {status}，金额变化: {win_amount}")
     return win_amount, status
 
-def car_main():
+def van_main():
     # 初始化 colorama（Windows 需要，用于支持光标控制）
     init()
     num_horses = 6
     CIRCLE = [f"({i+1})" for i in range(num_horses)]
 
     # 玩家下注
-    player_name, bet_amount, horse_choice = car_bet(num_horses)
-
+    player_name, bet_amount, horse_choice = van_bet(num_horses)
 
     # 生成赛程时间和信息
     race_times, game_info = generate_times(num_horses)
@@ -154,11 +154,11 @@ def car_main():
     winner_house_time = rankings[0][1]
     ranking_list = [horse for horse, _ in rankings]  # <-- 新增这一行
 
-    before_balance = Car_record.get_latest_balance(player_name)
+    before_balance = Truck_record.get_latest_balance(player_name)
     balance = before_balance + win_amount
     print(f"{player_name} balance : {balance}")
     # 保存记录                          balance
-    Car_record(player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
+    Van_record(player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
 
 if __name__ == "__main__":
-    car_main()
+    van_main()

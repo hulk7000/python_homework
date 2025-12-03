@@ -3,6 +3,9 @@ from rock_paper_scissor_game import *  # Assuming play_rps() is defined here
 from speed_type import *
 import play_house_game
 from car_game import *  # <-- import your car game here
+from truck_game import *
+from van_game import *
+from turtle_game import *
 
 def display_menu():
     while True:
@@ -11,10 +14,13 @@ def display_menu():
         print("2. Play rock paper scissors game")
         print("3. Play speed type game")
         print("4. Play horse game")
-        print("5. Play car spelling race game")  # <-- added option
+        print("5. Play car spelling race game")
+        print("6. Play truck game")
+        print("7. Play van game")
+        print("8. Play turtle game")
         print("0. Exit")
 
-        choice = input("Choose an option (1/2/3/4/5): ")
+        choice = input("Choose an option (1/2/3/4/5/6/7/8): ")
 
         if choice == "1":
             play_game()  # Guess game
@@ -26,6 +32,12 @@ def display_menu():
             play_house_game.horse_main()  # Horse game
         elif choice == "5":
             car_main()  # Car spelling race game
+        elif choice == "6":
+            truck_main()
+        elif choice == "7":
+            van_main()
+        elif choice == "8":
+            turtle_main()
         elif choice == "0":
             print("Exiting the game. Goodbye!")
             break

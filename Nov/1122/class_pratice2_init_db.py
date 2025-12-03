@@ -2,48 +2,75 @@ from sqlalchemy import create_engine, inspect
 from class_pratice2_model import Base
 import os
 
-# Define database path
-db_path = os.path.join(os.path.dirname(__file__), 'guessgame.db')
+DB_FILENAME = 'guessgame.db'
+DB_PATH = os.path.join(os.path.dirname(__file__), DB_FILENAME)
+DATABASE_URL = f"sqlite:///{DB_PATH}"
 
-# Create engine
-engine = create_engine(f'sqlite:///{db_path}', echo=False)
+engine = create_engine(DATABASE_URL, echo=False)
+inspector = inspect(engine)
 
-# Function to create all tables from Base
 def create_all_tables():
+    """Creates all tables defined in Base metadata."""
     Base.metadata.create_all(engine)
-    print("✅ All tables from Base have been created/updated.")
+    print("✅ Database tables created/updated successfully.\n")
 
-# 1️⃣ Check if database file exists
-if not os.path.exists(db_path):
-    print("❌ Database file does not exist. Creating database file and tables...")
-    create_all_tables()
-else:
-    print("ℹ️ Database file exists. Checking tables and columns...")
 
-    inspector = inspect(engine)
+def check_tables_and_columns():
+    """Checks that all tables & columns match the SQLAlchemy models."""
+    print("🔍 Checking tables and columns...\n")
 
-    # Iterate over all tables defined in Base
     for table in Base.metadata.tables.values():
         table_name = table.name
-        print(f"\nChecking table: '{table_name}'")
+        print(f"▶ Checking table: {table_name}")
 
-        # Check if table exists
         if not inspector.has_table(table_name):
-            print(f"❌ Table '{table_name}' does not exist. Creating table...")
-            create_all_tables()  # Creates all tables, including this one
+            print(f"   ❌ Table missing: {table_name}")
+            return False  # Something is missing → require full create
         else:
-            print(f"ℹ️ Table '{table_name}' exists. Checking columns...")
+            print(f"   ✔ Table exists.")
 
-            # Get existing columns in the table
-            existing_columns = [col['name'] for col in inspector.get_columns(table_name)]
-            # Get required columns from the model
-            required_columns = [col.name for col in table.columns]
+        # Existing DB columns
+        existing_columns = {
+            col['name'] for col in inspector.get_columns(table_name)
+        }
 
-            # Compare
-            missing_columns = [col for col in required_columns if col not in existing_columns]
+        # Required from model
+        model_columns = {col.name for col in table.columns}
 
-            if missing_columns:
-                print(f"❌ Missing columns in '{table_name}': {missing_columns}")
-                print("⚠️ Please add them manually or use a migration tool like Alembic.")
-            else:
-                print(f"✅ All required columns exist in '{table_name}'.")
+        # Compare
+        missing = model_columns - existing_columns
+
+        if missing:
+            print(f"   ❌ Missing columns: {missing}")
+            print("   ⚠️ Add manually or use Alembic migrations.")
+        else:
+            print("   ✔ All required columns exist.")
+
+        print()  # spacing
+
+    return True  # All tables + columns OK
+
+def main():
+    print("========== DATABASE VALIDATION ==========\n")
+
+    # Create database file if missing
+    if not os.path.exists(DB_PATH):
+        print(f"❌ Database file '{DB_FILENAME}' does not exist.")
+        print("➡️ Creating new database and tables...\n")
+        create_all_tables()
+        return
+
+    print(f"ℹ️ Database file '{DB_FILENAME}' found.\n")
+
+    # Check table structure
+    tables_ok = check_tables_and_columns()
+
+    if not tables_ok:
+        print("⚠️ Tables missing → Creating all tables...")
+        create_all_tables()
+    else:
+        print("✅ Database schema is up to date. Nothing to change.")
+
+
+if __name__ == "__main__":
+    main()
