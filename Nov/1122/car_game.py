@@ -2,7 +2,7 @@ import time
 import random
 import sys
 from colorama import init
-from add_record_to_db import Car_record
+from add_record_to_db import Car_record, User_record
 import json
 from datetime import datetime
 
@@ -154,11 +154,12 @@ def car_main():
     winner_house_time = rankings[0][1]
     ranking_list = [horse for horse, _ in rankings]  # <-- 新增这一行
 
-    before_balance = Car_record.get_latest_balance(player_name)
+    before_balance = User_record.get_latest_balance(player_name)
     balance = before_balance + win_amount
     print(f"{player_name} balance : {balance}")
     # 保存记录                          balance
     Car_record(player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
+    User_record(player_name, win_amount).update_balance()
 
 if __name__ == "__main__":
     car_main()

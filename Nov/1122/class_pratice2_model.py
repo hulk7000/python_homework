@@ -12,6 +12,14 @@ class Guess_game(Base):
     input_info = Column(String)
     created_time = Column(DateTime, default=datetime.now)
 
+class User_info(Base):
+    __tablename__ = 'user_info'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String(50), unique=True, nullable=False)
+    balance = Column(Integer, default=0)
+    created_time = Column(DateTime, default=datetime.now)
+
 class Message(Base):
     __tablename__ = "messages"
 

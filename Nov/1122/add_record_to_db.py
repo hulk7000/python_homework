@@ -78,6 +78,40 @@ class Type_record:
         )
         session.add(record)
         session.commit()
+class User_record:
+    def __init__(self, player_name, balance_change):
+        self.player_name = player_name
+        self.balance_change = balance_change
+
+    def update_balance(self):
+        user = (
+            session.query(User_info)
+            .filter_by(player_name=self.player_name)
+            .first()
+        )
+
+        if user:
+            user.balance += self.balance_change
+        else:
+            user = User_info(
+                player_name=self.player_name,
+                balance=self.balance_change
+            )
+            session.add(user)
+        session.commit()
+
+    @staticmethod
+    def get_latest_balance(username):
+
+        last_record = (
+            session.query(User_info)
+            .filter_by(player_name=username)
+            .order_by(desc(User_info.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
 
 class Horse_record:
     def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
@@ -656,3 +690,5 @@ if __name__ == "__main__":
     # msg = Add_message('k','message')
     # msg.add_content()
     # Horse_record("1","4","1","1","finish").add_info()
+    User_record("frank",-20).update_balance()
+    print(User_record.get_latest_balance("frank"))
