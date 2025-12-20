@@ -79,7 +79,7 @@ class Car_game(Base):
     created_time = Column(DateTime, default=datetime.now)
 
 class Truck_game(Base):
-    __tablename__ = 'Truck_game'
+    __tablename__ = 'truck_game'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     player_name = Column(String, nullable=False)
@@ -94,8 +94,8 @@ class Truck_game(Base):
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
 
-class Van_game(Base):
-    __tablename__ = 'Van_game'
+class snake_game(Base):
+    __tablename__ = 'snake_game'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     player_name = Column(String, nullable=False)
@@ -110,136 +110,8 @@ class Van_game(Base):
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
 
-class Turtle_game(Base):
-    __tablename__ = 'Turtle_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Dog_game(Base):
-    __tablename__ = 'Dog_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Fish_game(Base):
-    __tablename__ = 'Fish_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Run_game(Base):
-    __tablename__ = 'Run_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Robot_game(Base):
-    __tablename__ = 'Robot_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Eating_game(Base):
-    __tablename__ = 'Eating_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Snake_game(Base):
-    __tablename__ = 'Snake_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Cat_game(Base):
-    __tablename__ = 'Cat_game'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    bet_amount = Column(String, nullable=False)
-    balance = Column(Integer, nullable=False)
-    horse_choice = Column(String, nullable=False)
-    win_amount = Column(String, nullable=False)
-    winner_house = Column(String, nullable=False)
-    winner_house_time = Column(Float, nullable=False)
-    rankings = Column(String, nullable=False)
-    race_info = Column(String, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
-
-class Frog_game(Base):
-    __tablename__ = 'Frog_game'
+class Running_game(Base):
+    __tablename__ = 'running_game'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     player_name = Column(String, nullable=False)

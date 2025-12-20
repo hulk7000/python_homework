@@ -2,8 +2,7 @@ import time
 import random
 import sys
 from colorama import init
-from add_record_to_db import *
-from class_pratice2_model import *
+from add_record_to_db import Truck_record, User_record
 import json
 from datetime import datetime
 
@@ -30,7 +29,7 @@ def render_bar(p, bar_len=100):
     bar_len: 条长度
     """
     filled = int(p * bar_len)
-    return "-" * (bar_len - filled) + "🚛️" + "=" * filled
+    return "-" * (bar_len - filled) + "🏎️" + "=" * filled
 
 def race_animation(num_horses, CIRCLE, race_times):
     """
@@ -139,6 +138,7 @@ def truck_main():
     # 玩家下注
     player_name, bet_amount, horse_choice = truck_bet(num_horses)
 
+
     # 生成赛程时间和信息
     race_times, game_info = generate_times(num_horses)
 
@@ -154,11 +154,12 @@ def truck_main():
     winner_house_time = rankings[0][1]
     ranking_list = [horse for horse, _ in rankings]  # <-- 新增这一行
 
-    before_balance = Truck_record.get_latest_balance(player_name)
+    before_balance = User_record.get_latest_balance(player_name)
     balance = before_balance + win_amount
     print(f"{player_name} balance : {balance}")
     # 保存记录                          balance
     Truck_record(player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, ranking_list, game_info, status).add_info()
+    User_record(player_name, win_amount).update_balance()
 
 if __name__ == "__main__":
     truck_main()
