@@ -125,3 +125,35 @@ class Running_game(Base):
     race_info = Column(String, nullable=False)
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Dog_game(Base):
+    __tablename__ = 'dog_game'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(String, nullable=False)
+    balance = Column(Integer, nullable=False)
+    horse_choice = Column(String, nullable=False)
+    win_amount = Column(String, nullable=False)
+    winner_house = Column(String, nullable=False)
+    winner_house_time = Column(Float, nullable=False)
+    rankings = Column(String, nullable=False)
+    race_info = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)
+
+class Cat_game(Base):
+    __tablename__ = 'cat_game'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(String, nullable=False)
+    balance = Column(Integer, nullable=False)
+    horse_choice = Column(String, nullable=False)
+    win_amount = Column(String, nullable=False)
+    winner_house = Column(String, nullable=False)
+    winner_house_time = Column(Float, nullable=False)
+    rankings = Column(String, nullable=False)
+    race_info = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)

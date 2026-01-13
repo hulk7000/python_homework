@@ -5,6 +5,8 @@ from car_game import *
 from truck_game import *
 from snake_game import *
 from running_game import *
+from dog_game import *
+from cat_game import *
 
 def display_menu():
     while True:
@@ -16,9 +18,11 @@ def display_menu():
         print("5. Play truck game")
         print("6. Play snake game")
         print("7. Play running game")
+        print("8. Play dog game")
+        print("9. Play cat game")
         print("0. Exit")
 
-        choice = input("Choose an option (1/2/3/4/5/6/7): ")
+        choice = input("Choose an option (1/2/3/4/5/6/7/8/9): ")
 
         if choice == "1":
             play_game()  # Guess game
@@ -34,6 +38,10 @@ def display_menu():
             snake_main()
         elif choice == "7":
             running_main()
+        elif choice == "8":
+            dog_main()
+        elif choice == "9":
+            cat_main()
         elif choice == "0":
             print("Exiting the game. Goodbye!")
             break

@@ -317,6 +317,86 @@ class Running_record:
             return last_record.balance
         return 0  # 默认余额为 0
 
+class Dog_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Dog_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Dog_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Dog_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
+class Cat_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Cat_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+    @staticmethod
+    def get_latest_balance(player_name):
+        last_record = (
+            session.query(Cat_game)
+            .filter_by(player_name=player_name)
+            .order_by(desc(Cat_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
 if __name__ == "__main__":
     # Truck_record('tester','win',1000,'Abc','123',10.34,'2','2','3','3').add_info()
     # latest = Truck_record.get_latest_balance("tester")
