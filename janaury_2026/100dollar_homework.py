@@ -17,6 +17,8 @@ def find_quotes():
             print("—", q.select_one(".author").text)
             print("-" * 50)
 
+
+
 # find_quotes()
 
 def find_book():
