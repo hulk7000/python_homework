@@ -1,4 +1,4 @@
-import os,random,string
+import os,random,string,calendar
 
 # lis = [5,3,2,1]
 #
@@ -127,7 +127,7 @@ import os,random,string
 # # chri = "1"
 # print(chri.isdigit())
 # print(chri.isnumeric())
-
+#
 # while True:
 #     try:
 #         num = int(input("Please enter an integer: "))
@@ -140,7 +140,7 @@ import os,random,string
 #     else:
 #         print("The number is odd")
 #     break
-
+#
 # year = int(input("Enter a year : "))
 # if (year % 4)==0:
 #     if (year % 100) == 0:
@@ -152,3 +152,24 @@ import os,random,string
 #         print("{0} is a leap year".format(year))
 # else:
 #     print("{0} is not a leap year".format(year))
+
+# n=int(input("How many numbers you want to compare : "))
+# print("Enter the numbers you want to compare")
+# num = []
+# for i in range(1,n+1):
+#     temp = int(input("Enter number %d : " % i))
+#     num.append(temp)
+#
+# print("Your numbers are:",num)
+# print("Your biggest number is :",max(num))
+
+# yy = int(input("Enter the year : "))
+# mm = int(input("Enter the month : "))
+#
+# print(calendar.month(yy,mm))
+
+# yy = int(input("Enter the year : "))
+# mm = int(input("Enter the month : "))
+#
+# monthRange = calendar.monthrange(yy,mm)
+# print(monthRange)                     #(first_weekday, number_of_days)
