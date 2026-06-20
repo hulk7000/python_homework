@@ -1,4 +1,4 @@
-import os,random,string,calendar
+import os,random,string,calendar,datetime
 
 # lis = [5,3,2,1]
 #
@@ -162,14 +162,61 @@ import os,random,string,calendar
 #
 # print("Your numbers are:",num)
 # print("Your biggest number is :",max(num))
-
+#
 # yy = int(input("Enter the year : "))
 # mm = int(input("Enter the month : "))
 #
 # print(calendar.month(yy,mm))
-
+#
 # yy = int(input("Enter the year : "))
 # mm = int(input("Enter the month : "))
 #
 # monthRange = calendar.monthrange(yy,mm)
 # print(monthRange)                     #(first_weekday, number_of_days)
+
+# def add(x,y):
+#     return x+y
+#
+# def subtract(x,y):
+#     return x-y
+#
+# def multiply(x,y):
+#     return x*y
+#
+# def divide(x,y):
+#     return x/y
+#
+# print("Math equations : ")
+# print("1, add")
+# print("2, subtract")
+# print("3, multiply")
+# print("4, divide")
+#
+# choice = input("Plz enter(1/2/3/4): ")
+# num1 = int(input("Enter the first number : "))
+# num2 = int(input("Enter the second number : "))
+#
+# if choice == "1":
+#     print(num1, "+", num2, "=", add(num1,num2))
+#
+# elif choice == "2":
+#     print(num1, "-", num2, "=", subtract(num1,num2))
+#
+# elif choice == "3":
+#     print(num1, "*", num2, "=", multiply(num1,num2))
+#
+# elif choice == "4":
+#     if num2 !=0:
+#         print(num1, "/", num2, "=", divide(num1,num2))
+#     else:
+#         print("You can't enter 0")
+# else:
+#     print("invalid number")
+
+# def getYesterday():
+#     today=datetime.date.today()
+#     oneday=datetime.timedelta(days=1)
+#     yesterday = today-oneday
+#     return yesterday
+#
+# print(getYesterday())
