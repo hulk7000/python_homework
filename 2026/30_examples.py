@@ -46,14 +46,14 @@ import os,random,string,calendar,datetime
 #     for i in range(1,n):                                     #factorial : same as fac but user needs to input numbers
 #         result = result * i
 #     return result
-#
+
 # def fact(n):
 #     if n==1:                                                 #fact : Recursion solves factorial by repeatedly reducing n until 1, then multiplying results on the way back.”
 #         return 1
 #     return n * fact(n-1)
-#
-# print([d for d in os.listdir(".")])
 
+# print([d for d in os.listdir(".")])
+#
 # for d in os.listdir("."):
 #     if d.endswith(".py"):
 #         print(d)
@@ -62,7 +62,7 @@ import os,random,string,calendar,datetime
 # lowercase_list = [s.lower() for s in l]
 #
 # print(lowercase_list)
-
+#
 # def print_dir():
 #     filepath = input("Enter a directory path: ")
 #
@@ -122,12 +122,11 @@ import os,random,string,calendar,datetime
 # else:
 #     print(f"Nice job! You guessed the correct number {a} in {i} tries.")
 
-
 # chri = "一"
 # # chri = "1"
 # print(chri.isdigit())
 # print(chri.isnumeric())
-#
+
 # while True:
 #     try:
 #         num = int(input("Please enter an integer: "))
@@ -140,7 +139,7 @@ import os,random,string,calendar,datetime
 #     else:
 #         print("The number is odd")
 #     break
-#
+
 # year = int(input("Enter a year : "))
 # if (year % 4)==0:
 #     if (year % 100) == 0:
@@ -167,7 +166,7 @@ import os,random,string,calendar,datetime
 # mm = int(input("Enter the month : "))
 #
 # print(calendar.month(yy,mm))
-#
+
 # yy = int(input("Enter the year : "))
 # mm = int(input("Enter the month : "))
 #
@@ -212,7 +211,7 @@ import os,random,string,calendar,datetime
 #         print("You can't enter 0")
 # else:
 #     print("invalid number")
-
+#
 # def getYesterday():
 #     today=datetime.date.today()
 #     oneday=datetime.timedelta(days=1)
