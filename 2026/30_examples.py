@@ -10,7 +10,7 @@ import os,random,string,calendar,datetime
 #     return lis
 #
 # print(sortport())
-
+#
 # def power(x, n):
 #     h=1
 #     while n>0:
@@ -46,12 +46,12 @@ import os,random,string,calendar,datetime
 #     for i in range(1,n):                                     #factorial : same as fac but user needs to input numbers
 #         result = result * i
 #     return result
-
+#
 # def fact(n):
 #     if n==1:                                                 #fact : Recursion solves factorial by repeatedly reducing n until 1, then multiplying results on the way back.”
 #         return 1
 #     return n * fact(n-1)
-
+#
 # print([d for d in os.listdir(".")])
 #
 # for d in os.listdir("."):
@@ -62,7 +62,7 @@ import os,random,string,calendar,datetime
 # lowercase_list = [s.lower() for s in l]
 #
 # print(lowercase_list)
-#
+
 # def print_dir():
 #     filepath = input("Enter a directory path: ")
 #
@@ -151,7 +151,7 @@ import os,random,string,calendar,datetime
 #         print("{0} is a leap year".format(year))
 # else:
 #     print("{0} is not a leap year".format(year))
-
+#
 # n=int(input("How many numbers you want to compare : "))
 # print("Enter the numbers you want to compare")
 # num = []
@@ -172,7 +172,7 @@ import os,random,string,calendar,datetime
 #
 # monthRange = calendar.monthrange(yy,mm)
 # print(monthRange)                     #(first_weekday, number_of_days)
-
+#
 # def add(x,y):
 #     return x+y
 #
@@ -211,7 +211,7 @@ import os,random,string,calendar,datetime
 #         print("You can't enter 0")
 # else:
 #     print("invalid number")
-#
+
 # def getYesterday():
 #     today=datetime.date.today()
 #     oneday=datetime.timedelta(days=1)
