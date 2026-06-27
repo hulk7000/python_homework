@@ -219,3 +219,13 @@ import os,random,string,calendar,datetime
 #     return yesterday
 #
 # print(getYesterday())
+
+path_prefix = "abc.com/ss"
+
+numlist = range(100)
+
+def a():
+    for num in numlist:
+        url = path_prefix + f"{num:02d}"
+        print(url)
+a()
