@@ -10,7 +10,7 @@ import os,random,string,calendar,datetime
 #     return lis
 #
 # print(sortport())
-#
+
 # def power(x, n):
 #     h=1
 #     while n>0:
@@ -57,7 +57,7 @@ import os,random,string,calendar,datetime
 # for d in os.listdir("."):
 #     if d.endswith(".py"):
 #         print(d)
-
+#
 # l = ["Hello", "World", "IBM", "Apple"]
 # lowercase_list = [s.lower() for s in l]
 #
@@ -75,39 +75,33 @@ import os,random,string,calendar,datetime
 #                 print(os.path.join(filepath, i))
 #         except:
 #             print("Please input a correct path.")
-#
 # print_dir()
-
-# for i in range(1,10):
-#     for j in range(1,i+1):
-#         print("%d * %d = %d \t"%(j,i,i*j),end="")
-#     print()
-
-# num=["harden","lampard",3,34,45,56,76,87,78,45,3,3,3,87686,98,76]
 #
+# num=["harden","lampard",3,34,45,56,76,87,78,45,3,3,3,87686,98,76]
+
 # for i in range(num.count(3)):
 #     ele_index = num.index(3)                #ele = element
 #     num[ele_index]="3a"
 #     print(num)
-
+#
 # l = ["James","Meng","Xin"]
 # for i in range(len(l)):
 #     print("Hello, %s"%l[i])
-
+#
 # l1=[2,3,8,4,9,5,6]
 # l2=[5,6,10,17,11,2,"apple"]
 # l3 = l1+l2
 # print(l3)
 # print(set(l3))                             #set = no duplicit
 # print(list(set(l3)))
-
+#
 # str1 = "0123456789"
 # str2 = string.ascii_letters
 # str3 = str1+str2
 # ma1 = random.sample(str3,9)
 # ma1 = ''.join(ma1)
 # print(ma1)
-
+#
 # i = 1
 # a = random.randint(0,100)
 # b = int(input("Please enter a number from 0-100 : "))
@@ -121,12 +115,12 @@ import os,random,string,calendar,datetime
 #     i+=1
 # else:
 #     print(f"Nice job! You guessed the correct number {a} in {i} tries.")
-
+#
 # chri = "一"
 # # chri = "1"
 # print(chri.isdigit())
 # print(chri.isnumeric())
-
+#
 # while True:
 #     try:
 #         num = int(input("Please enter an integer: "))
@@ -161,7 +155,7 @@ import os,random,string,calendar,datetime
 #
 # print("Your numbers are:",num)
 # print("Your biggest number is :",max(num))
-#
+
 # yy = int(input("Enter the year : "))
 # mm = int(input("Enter the month : "))
 #
@@ -172,7 +166,7 @@ import os,random,string,calendar,datetime
 #
 # monthRange = calendar.monthrange(yy,mm)
 # print(monthRange)                     #(first_weekday, number_of_days)
-#
+
 # def add(x,y):
 #     return x+y
 #
@@ -210,22 +204,21 @@ import os,random,string,calendar,datetime
 #     else:
 #         print("You can't enter 0")
 # else:
-#     print("invalid number")
+#     print("invalid number"))
 
 # def getYesterday():
 #     today=datetime.date.today()
 #     oneday=datetime.timedelta(days=1)
 #     yesterday = today-oneday
 #     return yesterday
-#
 # print(getYesterday())
 
-path_prefix = "abc.com/ss"
-
-numlist = range(100)
-
-def a():
-    for num in numlist:
-        url = path_prefix + f"{num:02d}"
-        print(url)
-a()
+# path_prefix = "abc.com/ss"
+#
+# numlist = range(1000)
+#
+# def a():
+#     for num in numlist:
+#         url = path_prefix + f"{num:02d}"
+#         print(url)
+# a()
