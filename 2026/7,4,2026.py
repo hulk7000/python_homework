@@ -221,3 +221,12 @@ import os,random,string,calendar,datetime
 #         url = path_prefix + f"{num:02d}"
 #         print(url)
 # a()
+
+sum = 0
+term = 3
+
+while term <= 1536:
+    sum += term
+    term *= 2
+
+print("sum =", sum)
