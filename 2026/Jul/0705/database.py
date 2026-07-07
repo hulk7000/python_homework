@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String , desc
 from sqlalchemy.orm import sessionmaker
+import json
 from init_db import *
 import os
 from model import *
@@ -58,3 +59,80 @@ class Add_message:
         session.add(entry)
         session.commit()
         print(f"Message added:, {self.category},{self.content}")
+
+class Horse_record:
+    def __init__(self, player_name,bet_amount,balance,horse_choice,win_amount,winner_house, winner_house_time, rankings, race_info,status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.horse_choice = horse_choice
+        self.win_amount = win_amount
+        self.winner_house = winner_house
+        self.winner_house_time = winner_house_time
+        self.rankings = rankings
+        self.race_info = race_info
+        self.status = status
+
+    def add_info(self):
+        record = Horse_game(
+            player_name =self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            horse_choice=self.horse_choice,
+            win_amount=self.win_amount,
+            winner_house=self.winner_house,
+            winner_house_time=self.winner_house_time,
+            rankings=json.dumps(self.rankings),  # 改这里
+            race_info=json.dumps(self.race_info),  # 改这里
+            status=self.status
+        )
+        session.add(record)
+        session.commit()
+
+    @staticmethod
+    def get_latest_balance(username):
+
+        last_record = (
+            session.query(Horse_game)
+            .filter_by(player_name=username)
+            .order_by(desc(Horse_game.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0
+
+class User_record:
+    def __init__(self, player_name, balance_change):
+        self.player_name = player_name
+        self.balance_change = balance_change
+
+    def update_balance(self):
+        user = (
+            session.query(User_info)
+            .filter_by(player_name=self.player_name)
+            .first()
+        )
+
+        if user:
+            user.balance += self.balance_change
+        else:
+            user = User_info(
+                player_name=self.player_name,
+                balance=self.balance_change
+            )
+            session.add(user)
+        session.commit()
+
+    @staticmethod
+    def get_latest_balance(username):
+
+        last_record = (
+            session.query(User_info)
+            .filter_by(player_name=username)
+            .order_by(desc(User_info.id))
+            .first()
+        )
+        if last_record:
+            return last_record.balance
+        return 0  # 默认余额为 0

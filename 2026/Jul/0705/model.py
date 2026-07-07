@@ -27,3 +27,27 @@ class Message(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     category = Column(String, nullable=False)
     content = Column(String, nullable=False)
+
+class Horse_game(Base):
+    __tablename__ = "horse_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(String, nullable=False)
+    balance = Column(Integer, nullable=False)
+    horse_choice = Column(String, nullable=False)
+    win_amount = Column(String, nullable=False)
+    winner_house = Column(String, nullable=False)
+    winner_house_time = Column(Float, nullable=False)
+    rankings = Column(String, nullable=False)
+    race_info = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)
+
+class User_info(Base):
+    __tablename__ = 'user_info'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String(50), unique=True, nullable=False)
+    balance = Column(Integer, default=0)
+    created_time = Column(DateTime, default=datetime.now)
