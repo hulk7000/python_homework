@@ -1,6 +1,5 @@
 import random
 from database import *
-from model import *
 
 def play_rps():
     choices = ["Rock", "Paper", "Scissors"]
