@@ -5,6 +5,7 @@ from init_db import *
 import os
 from model import *
 
+
 db_path = os.path.join(os.path.dirname(__file__), 'game.db')
 engine = create_engine(f'sqlite:///{db_path}', echo=False)
 Session = sessionmaker(bind=engine)
@@ -13,37 +14,80 @@ session = Session()
 Base.metadata.create_all(engine)
 
 class Record_game:
-    def __init__(self, play_name, tries, input_info):
-        self.play_name = play_name
+    def __init__(self, player_name, bet_amount, balance, tries, input_info, win_amount, result):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
         self.tries = tries
         self.input_info = input_info
+        self.win_amount = win_amount
+        self.result = result
 
     def add_record(self):
         entry = Guess_game(
-            play_name=self.play_name,
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
             tries=self.tries,
             input_info=self.input_info,
+            win_amount=self.win_amount,
+            result=self.result
         )
+
         session.add(entry)
         session.commit()
-        print(f"✅ 已添加到数据库: {self.play_name} ({self.tries}) {self.input_info}")
+
+        print(
+            f"Info added: {self.player_name}, "
+            f"Bet: {self.bet_amount}, "
+            f"Result: {self.result}, "
+            f"Balance: {self.balance}"
+        )
+
+    @staticmethod
+    def get_latest_balance(player_name):
+        latest_record = (
+            session.query(Guess_game)
+            .filter_by(player_name=player_name)
+            .order_by(Guess_game.id.desc())
+            .first()
+        )
+
+        if latest_record:
+            return latest_record.balance
+        else:
+            return 0
 
 class RPS_record_game:
-    def __init__(self, bot, player, result):
-        self.bot = bot
-        self.player = player
+    def __init__(self, player_name, bet_amount, balance, player_choice, bot_choice, win_amount, result):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.balance = balance
+        self.bot_choice = bot_choice
+        self.player_choice = player_choice
+        self.win_amount = win_amount
         self.result = result
 
     def add_info(self):
-        entry = Rock_paper_scissors(
-            bot=self.bot,
-            player=self.player,
+        entry = RPS_game(
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            balance=self.balance,
+            bot_choice=self.bot_choice,
+            player_choice=self.player_choice,
+            win_amount=self.win_amount,
             result=self.result,
         )
 
         session.add(entry)
         session.commit()
-        print(f"info added:, {self.bot},{self.player}")
+
+        print(
+            f"Info added: {self.player_name}, "
+            f"Bet: {self.bet_amount}, "
+            f"Result: {self.result}, "
+            f"Balance: {self.balance}"
+        )
 
 class Add_message:
     def __init__(self, category, content):

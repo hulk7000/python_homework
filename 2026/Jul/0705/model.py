@@ -6,18 +6,26 @@ Base = declarative_base()
 
 class Guess_game(Base):
     __tablename__ = "guess_game"
-    id = Column(Integer, primary_key=True)
-    play_name = Column(String)
-    tries = Column(String)
-    input_info = Column(String)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    balance = Column(Integer, nullable=False)
+    tries = Column(Integer, nullable=False)
+    input_info = Column(String, nullable=False)
+    win_amount = Column(Integer, nullable=False)
+    result = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
 
-class Rock_paper_scissors(Base):
+class RPS_game(Base):
     __tablename__ = "rps_game"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    bot = Column(String, nullable=False)
-    player = Column(String, nullable=False)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    balance = Column(Integer, nullable=False)
+    player_choice = Column(String, nullable=False)
+    bot_choice = Column(String, nullable=False)
+    win_amount = Column(Integer, nullable=False)
     result = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
 

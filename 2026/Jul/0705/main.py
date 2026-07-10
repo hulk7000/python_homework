@@ -12,7 +12,7 @@ def display_menu():
         choice = input("Choose an option (1/2/3): ")
 
         if choice == "1":
-            play_game()
+            play_guess()
         elif choice == "2":
             play_rps()
         elif choice == "3":

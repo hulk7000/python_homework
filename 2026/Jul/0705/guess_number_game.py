@@ -1,126 +1,134 @@
-import os
 import random
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker, declarative_base
+from database import *
 from model import *
+from sqlalchemy import desc
 
-# -----------------------------
-# Database setup
-# -----------------------------
-db_path = os.path.join(os.path.dirname(__file__), 'game.db')
-engine = create_engine(f'sqlite:///{db_path}', echo=False)
-Session = sessionmaker(bind=engine)
-session = Session()
-Base = declarative_base()
-
-# -----------------------------
-# Game record class
-# -----------------------------
-class Record_game:
-    def __init__(self, play_name, tries, input_info):
-        self.play_name = play_name
-        self.tries = tries
-        self.input_info = input_info
-
-    def add_record(self):
-        """Add a player's game record to the database."""
-        entry = Guess_game(
-            play_name=self.play_name,
-            tries=self.tries,
-            input_info=self.input_info
-        )
-        session.add(entry)
-        session.commit()
-        print(f"✅ Added game record: {self.play_name} ({self.tries}) {self.input_info}")
-
-# -----------------------------
-# Messages helper function
-# -----------------------------
-def add_message(category, content):
-    """Add a message to the database."""
-    entry = Message(category=category, content=content)
-    session.add(entry)
-    session.commit()
-    print(f"✅ Saved message: [{category}] {content}")
-
-# -----------------------------
-# Create tables
-# -----------------------------
-Base.metadata.create_all(engine)
-
-# -----------------------------
-# Get messages directly from DB
-# -----------------------------
-def get_messages(category):
-    """Fetch all messages for a given category from the database."""
-    messages = session.query(Message.content).filter(Message.category == category).all()
-    return [m[0] for m in messages]  # extract strings from tuples
-
-# -----------------------------
-# Guessing game helpers
-# -----------------------------
 def get_number(prompt):
-    while True:
-        ans = input(prompt).strip().lower()
-        if ans == "":
-            print("Please type a number! 😊")
-            continue
-        if ans == "answer":
-            return "ANSWER"
-        if not ans.isdigit():
-            print("Only numbers allowed! 🔢")
-            continue
-        return int(ans)
 
-# -----------------------------
-# Main guessing game logic
-# -----------------------------
-def play_game():
+    while True:
+        answer = input(prompt).strip().lower()
+
+        if answer == "answer":
+            return "ANSWER"
+
+        if answer.isdigit():
+            return int(answer)
+
+        print("Please enter a number!")
+
+def play_guess():
+
+    def get_messages(category):
+        messages = session.query(Message.content).filter(Message.category == category).all()
+        return [m[0] for m in messages]
+
     greetings = get_messages("greetings")
     start_messages = get_messages("start_message")
     hints_low = get_messages("hints_low")
     hints_high = get_messages("hints_high")
     win_messages = get_messages("win_messages")
 
-    if not (greetings and start_messages and hints_low and hints_high and win_messages):
-        print("⚠️ Some message categories are empty. Please populate the database first!")
+
+    if not greetings:
+        print("No messages found!")
         return
+
 
     print(random.choice(greetings))
     print(random.choice(start_messages))
 
-    username = input("Please enter your username: ")
+
+    player_name = input("Enter your name: ")
+
+
+    while True:
+        try:
+            bet_amount = int(input("Enter your bet amount: "))
+
+            if bet_amount <= 0:
+                print("Bet must be greater than 0")
+                continue
+
+            break
+
+        except ValueError:
+            print("Enter a valid number")
+
+
+
     secret_number = random.randint(1, 100)
+
     guess = 0
-    guess_count = 0
+    tries = 0
     guess_list = []
 
+
     while guess != secret_number:
-        guess = get_number("Take a guess: ")
+
+        guess = get_number("Guess a number (1-100): ")
+
+
         if guess == "ANSWER":
-            print(f"🕵️ SECRET NUMBER = {secret_number}")
+            print(f"Secret number is {secret_number}")
             continue
 
-        guess_count += 1
+
+        tries += 1
         guess_list.append(guess)
+
 
         if guess < secret_number:
             print(random.choice(hints_low))
+
         elif guess > secret_number:
             print(random.choice(hints_high))
 
+
+
     print(random.choice(win_messages))
-    print(f"The secret number was: {secret_number}")
-    print(f"{username} guessed it in {guess_count} tries! 🎯")
+
+    print(f"Secret number: {secret_number}")
+    print(f"You got it in {tries} tries!")
     print("Your guesses:", guess_list)
 
-    # Save game record
-    record = Record_game(username, guess_count, str(guess_list))
-    record.add_record()
-    return
-# -----------------------------
-# Run the game
-# -----------------------------
 
-if __name__ == '__main__':
-    print("hulk is lazy")
+
+    if tries <= 7:
+
+        win_amount = bet_amount * 2
+        result = "Win"
+
+        print("🎉 You doubled your money!")
+
+    else:
+
+        win_amount = -bet_amount
+        result = "Lose"
+
+        print("😢 Too many tries. You lost your bet!")
+
+
+
+    old_balance = Record_game.get_latest_balance(player_name)
+
+    balance = old_balance + win_amount
+
+
+    print(f"Guess game balance: {balance}")
+
+    record = Record_game(
+        player_name,
+        bet_amount,
+        balance,
+        tries,
+        str(guess_list),
+        win_amount,
+        result
+    )
+
+    record.add_record()
+
+
+
+if __name__ == "__main__":
+    play_guess()
