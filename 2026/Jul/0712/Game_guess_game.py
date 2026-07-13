@@ -107,26 +107,26 @@ def play_guess():
 
         print("😢 Too many tries. You lost your bet!")
 
+    user = User_record(player_name, win_amount)
+    user.update_balance()
 
+    # Get the updated balance
+    new_balance = User_record.get_latest_balance(player_name)
 
-    old_balance = Record_game.get_latest_balance(player_name)
-
-    balance = old_balance + win_amount
-
-
-    print(f"Guess game balance: {balance}")
-
-    record = Record_game(
-        player_name,
-        bet_amount,
-        balance,
-        tries,
-        str(guess_list),
-        win_amount,
-        result
+    # Save the guess game record
+    game_record = Record_game(
+        player_name=player_name,
+        bet_amount=bet_amount,
+        balance=new_balance,
+        tries=tries,
+        input_info=str(guess_list),  # or json.dumps(guess_list)
+        win_amount=win_amount,
+        result=result
     )
 
-    record.add_record()
+    game_record.add_record()
+
+    print(f"Guess game balance: {new_balance}")
 
 
 

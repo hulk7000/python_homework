@@ -182,36 +182,3 @@ class User_record:
         if last_record:
             return last_record.balance
         return 0  # 默认余额为 0
-
-class Money_data:
-    def __init__(self, player_name, game_name, bet_amount, balance, win_amount, status):
-        self.player_name = player_name
-        self.game_name = game_name
-        self.bet_amount = bet_amount
-        self.balance = balance
-        self.win_amount = win_amount
-        self.status = status
-
-    def add_info(self):
-        record = Money_record(
-            player_name=self.player_name,
-            game_name=self.game_name,
-            bet_amount=self.bet_amount,
-            balance=self.balance,
-            win_amount=self.win_amount,
-            status=self.status
-        )
-
-        session.add(record)
-        session.commit()
-
-    @staticmethod
-    def get_latest_balance(username):
-        record = (
-            session.query(Money_record)
-            .filter(Money_record.player_name == username)
-            .order_by(Money_record.id.desc())
-            .first()
-        )
-
-        return record.balance if record else 0

@@ -8,8 +8,9 @@ def display_menu():
         print("1. Play guess game")
         print("2. Play rock paper scissors game")
         print("3. Play horse game")
+        print("0. Exit game")
 
-        choice = input("Choose an option (1/2/3): ")
+        choice = input("Choose an option (1/2/3/0): ")
 
         if choice == "1":
             play_guess()

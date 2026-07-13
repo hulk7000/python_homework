@@ -60,15 +60,3 @@ class User_info(Base):
     player_name = Column(String(50), unique=True, nullable=False)
     balance = Column(Integer, default=0)
     created_time = Column(DateTime, default=datetime.now)
-
-class Money_record(Base):
-    __tablename__ = "money_record"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    player_name = Column(String, nullable=False)
-    game_name = Column(String, nullable=False)
-    bet_amount = Column(Integer, nullable=False)
-    balance = Column(Integer, nullable=False)
-    win_amount = Column(Integer, nullable=False)
-    status = Column(String, nullable=False)
-    created_time = Column(DateTime, default=datetime.now)
