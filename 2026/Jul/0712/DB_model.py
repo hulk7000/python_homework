@@ -60,3 +60,17 @@ class User_info(Base):
     player_name = Column(String(50), unique=True, nullable=False)
     balance = Column(Integer, default=0)
     created_time = Column(DateTime, default=datetime.now)
+
+class Guess_hand_game(Base):
+    __tablename__ = "guess_hand_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    pre_balance = Column(Integer, nullable=False)
+    new_balance = Column(Integer, nullable=False)
+    player_choice = Column(String, nullable=False)
+    hidden_item = Column(String, nullable=False)
+    win_amount = Column(Integer, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)

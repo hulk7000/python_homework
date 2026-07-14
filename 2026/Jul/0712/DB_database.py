@@ -182,3 +182,52 @@ class User_record:
         if last_record:
             return last_record.balance
         return 0  # 默认余额为 0
+
+class Guess_hand_record:
+    def __init__(self, player_name, bet_amount, pre_balance, new_balance, player_choice, hidden_item, win_amount, status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.pre_balance = pre_balance
+        self.new_balance = new_balance
+        self.player_choice = player_choice
+        self.hidden_item = hidden_item
+        self.win_amount = win_amount
+        self.status = status
+
+    def add_info(self):
+
+        record = Guess_hand_game(
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            pre_balance=self.pre_balance,
+            new_balance=self.new_balance,
+            player_choice=self.player_choice,
+            hidden_item=self.hidden_item,
+            win_amount=self.win_amount,
+            status=self.status,
+        )
+
+        session.add(record)
+        session.commit()
+
+        print(
+            f"Info added: {self.player_name}, "
+            f"Bet: {self.bet_amount}, "
+            f"Result: {self.status}, "
+            f"Balance: {self.new_balance}"
+        )
+
+    @staticmethod
+    def get_latest_balance(username):
+
+        last_record = (
+            session.query(Guess_hand_game)
+            .filter_by(player_name=username)
+            .order_by(desc(Guess_hand_game.id))
+            .first()
+        )
+
+        if last_record:
+            return last_record.new_balance
+
+        return 0
