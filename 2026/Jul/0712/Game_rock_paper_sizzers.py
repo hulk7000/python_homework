@@ -45,6 +45,7 @@ def play_rps():
     balance = before_balance + win_amount
 
     print(f"Result: {result}")
+    print(f"Before Balance: {before_balance}")
     print(f"Balance: {balance}")
 
     game_record = RPS_record_game(

@@ -74,3 +74,17 @@ class Guess_hand_game(Base):
     win_amount = Column(Integer, nullable=False)
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Coin_flip_game(Base):
+    __tablename__ = "coin_flip_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    pre_balance = Column(Integer, nullable=False)
+    new_balance = Column(Integer, nullable=False)
+    player_choice = Column(String, nullable=False)
+    coin_result = Column(String, nullable=False)
+    win_amount = Column(Integer, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)

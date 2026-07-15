@@ -231,3 +231,29 @@ class Guess_hand_record:
             return last_record.new_balance
 
         return 0
+
+class Coin_flip_record:
+    def __init__(self, player_name, bet_amount, pre_balance, new_balance, player_choice, coin_result, win_amount, status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.pre_balance = pre_balance
+        self.new_balance = new_balance
+        self.player_choice = player_choice
+        self.coin_result = coin_result
+        self.win_amount = win_amount
+        self.status = status
+
+    def add_info(self):
+        record = Coin_flip_game(
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            pre_balance=self.pre_balance,
+            new_balance=self.new_balance,
+            player_choice=self.player_choice,
+            coin_result=self.coin_result,
+            win_amount=self.win_amount,
+            status=self.status,
+        )
+
+        session.add(record)
+        session.commit()
