@@ -257,3 +257,31 @@ class Coin_flip_record:
 
         session.add(record)
         session.commit()
+
+class Whack_record:
+    def __init__(self, player_name, bet_amount, pre_balance, new_balance, hits, misses, score, win_amount, status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.pre_balance = pre_balance
+        self.new_balance = new_balance
+        self.hits = hits
+        self.misses = misses
+        self.score = score
+        self.win_amount = win_amount
+        self.status = status
+
+    def add_info(self):
+        record = Whack_game(
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            pre_balance=self.pre_balance,
+            new_balance=self.new_balance,
+            hits=self.hits,
+            misses=self.misses,
+            score=self.score,
+            win_amount=self.win_amount,
+            status=self.status,
+        )
+
+        session.add(record)
+        session.commit()

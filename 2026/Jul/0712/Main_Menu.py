@@ -3,6 +3,7 @@ from Game_rock_paper_sizzers import *
 from Game_horse_game import *
 from Game_guess_hand_game import *
 from Game_coin_flip_game import *
+from Game_whack_a_mole import *
 
 def display_menu():
     while True:
@@ -11,9 +12,12 @@ def display_menu():
         print("2. Play rock paper scissors game")
         print("3. Play horse game")
         print("4. Play guess hand game")
+        print("5. Play coin flip game")
+        print("6. Play whack a mole game")
+
         print("0. Exit game")
 
-        choice = input("Choose an option (1/2/3/4/5/0): ")
+        choice = input("Choose an option (1/2/3/4/5/6/0): ")
 
         if choice == "1":
             play_guess()
@@ -25,6 +29,8 @@ def display_menu():
             guess_main()
         elif choice == "5":
             coin_flip_main()
+        elif choice == "6":
+            play_whack()
         elif choice == "0":
             print("Exiting the game. Goodbye!")
             break

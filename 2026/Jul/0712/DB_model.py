@@ -88,3 +88,18 @@ class Coin_flip_game(Base):
     win_amount = Column(Integer, nullable=False)
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Whack_game(Base):
+    __tablename__ = "whack_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    pre_balance = Column(Integer, nullable=False)
+    new_balance = Column(Integer, nullable=False)
+    hits = Column(Integer, nullable=False)
+    misses = Column(Integer, nullable=False)
+    score = Column(Integer, nullable=False)
+    win_amount = Column(Integer, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)
