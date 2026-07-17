@@ -17,6 +17,14 @@ def guess_bet():
 
     name = input("Enter player name: ")
 
+    pre_balance = User_record.get_latest_balance(name)
+
+    print(f"\nCurrent Balance: {pre_balance}")
+
+    if pre_balance <= 0:
+        print("❌ You don't have enough balance to play.")
+        return None
+
     while True:
         try:
             amount = int(input(f"{name}, enter your bet amount: "))
@@ -24,6 +32,11 @@ def guess_bet():
             if amount <= 0:
                 print("Bet must be greater than 0.")
                 continue
+
+            if amount > pre_balance:
+                print("❌ Bet exceeds your balance.")
+                continue
+
             break
 
         except ValueError:
@@ -89,7 +102,12 @@ def guess_main():
 
     init()
 
-    player_name, bet_amount = guess_bet()
+    bet_info = guess_bet()
+
+    if bet_info is None:
+        return
+
+    player_name, bet_amount = bet_info
 
     hidden_item, player_choice = guess_game()
 
@@ -99,16 +117,16 @@ def guess_main():
         bet_amount,
     )
 
-    balance = User_record.get_latest_balance(player_name)
-    new_balance = balance + win_amount
+    pre_balance = User_record.get_latest_balance(player_name)
+    new_balance = pre_balance + win_amount
 
-    print(f"\nBefore Balance: {balance}")
-    print(f"\nCurrent Balance: {new_balance}")
+    print(f"\nBefore Balance: {pre_balance}")
+    print(f"Current Balance: {new_balance}")
 
     Guess_hand_record(
         player_name=player_name,
         bet_amount=bet_amount,
-        pre_balance=balance,
+        pre_balance=pre_balance,
         new_balance=new_balance,
         player_choice=player_choice,
         hidden_item=hidden_item,

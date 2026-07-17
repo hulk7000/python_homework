@@ -1,7 +1,7 @@
 import random
 from DB_database import *
 from DB_model import *
-from sqlalchemy import desc
+
 
 def get_number(prompt):
 
@@ -16,11 +16,16 @@ def get_number(prompt):
 
         print("Please enter a number!")
 
+
 def play_guess():
 
     def get_messages(category):
-        messages = session.query(Message.content).filter(Message.category == category).all()
+        messages = session.query(Message.content).filter(
+            Message.category == category
+        ).all()
+
         return [m[0] for m in messages]
+
 
     greetings = get_messages("greetings")
     start_messages = get_messages("start_message")
@@ -41,18 +46,37 @@ def play_guess():
     player_name = input("Enter your name: ")
 
 
+    # Check balance before betting
+    pre_balance = User_record.get_latest_balance(player_name)
+
+    print(f"\nCurrent Balance: {pre_balance}")
+
+
+    if pre_balance <= 0:
+        print("❌ You don't have enough balance to play.")
+        return
+
+
     while True:
         try:
             bet_amount = int(input("Enter your bet amount: "))
 
+
             if bet_amount <= 0:
-                print("Bet must be greater than 0")
+                print("Bet must be greater than 0.")
                 continue
+
+
+            if bet_amount > pre_balance:
+                print("❌ Bet exceeds your balance.")
+                continue
+
 
             break
 
+
         except ValueError:
-            print("Enter a valid number")
+            print("Enter a valid number.")
 
 
 
@@ -80,12 +104,14 @@ def play_guess():
         if guess < secret_number:
             print(random.choice(hints_low))
 
+
         elif guess > secret_number:
             print(random.choice(hints_high))
 
 
 
     print(random.choice(win_messages))
+
 
     print(f"Secret number: {secret_number}")
     print(f"You got it in {tries} tries!")
@@ -100,6 +126,7 @@ def play_guess():
 
         print("🎉 You doubled your money!")
 
+
     else:
 
         win_amount = -bet_amount
@@ -107,26 +134,35 @@ def play_guess():
 
         print("😢 Too many tries. You lost your bet!")
 
-    user = User_record(player_name, win_amount)
-    user.update_balance()
 
-    # Get the updated balance
-    new_balance = User_record.get_latest_balance(player_name)
 
-    # Save the guess game record
+    new_balance = pre_balance + win_amount
+
+
+    print(f"\nBefore Balance: {pre_balance}")
+    print(f"Current Balance: {new_balance}")
+
+
+
     game_record = Record_game(
         player_name=player_name,
         bet_amount=bet_amount,
         balance=new_balance,
         tries=tries,
-        input_info=str(guess_list),  # or json.dumps(guess_list)
+        input_info=str(guess_list),
         win_amount=win_amount,
         result=result
     )
 
+
     game_record.add_record()
 
-    print(f"Guess game balance: {new_balance}")
+
+
+    User_record(
+        player_name,
+        win_amount
+    ).update_balance()
 
 
 

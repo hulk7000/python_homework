@@ -3,15 +3,31 @@ from DB_database import Coin_flip_record, User_record
 
 
 def coin_flip_bet():
+
     player_name = input("Enter player name: ")
+
+    pre_balance = User_record.get_latest_balance(player_name)
+
+    print(f"\nCurrent Balance: {pre_balance}")
+
+    if pre_balance <= 0:
+        print("❌ You don't have enough balance to play.")
+        return None
 
     while True:
         try:
             bet_amount = int(input("Enter bet amount: "))
+
             if bet_amount <= 0:
                 print("Bet must be greater than 0.")
                 continue
+
+            if bet_amount > pre_balance:
+                print("❌ Bet exceeds your balance.")
+                continue
+
             break
+
         except ValueError:
             print("Enter a valid number.")
 
@@ -44,7 +60,12 @@ def coin_result(player_choice, coin, bet_amount):
 
 def coin_flip_main():
 
-    player_name, bet_amount, player_choice = coin_flip_bet()
+    bet_info = coin_flip_bet()
+
+    if bet_info is None:
+        return
+
+    player_name, bet_amount, player_choice = bet_info
 
     coin = flip_coin()
 
@@ -60,7 +81,8 @@ def coin_flip_main():
     new_balance = pre_balance + win_amount
 
     print(f"{player_name} {status}!")
-    print(f"Balance: {new_balance}")
+    print(f"Before Balance: {pre_balance}")
+    print(f"Current Balance: {new_balance}")
 
     Coin_flip_record(
         player_name,

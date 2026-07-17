@@ -285,3 +285,31 @@ class Whack_record:
 
         session.add(record)
         session.commit()
+
+class Money_record:
+
+    def __init__(self, player_name, amount, pre_balance, new_balance, transaction_type):
+        self.player_name = player_name
+        self.amount = amount
+        self.pre_balance = pre_balance
+        self.new_balance = new_balance
+        self.transaction_type = transaction_type
+
+    def add_info(self):
+        record = Money_transaction(
+            player_name=self.player_name,
+            amount=self.amount,
+            pre_balance=self.pre_balance,
+            new_balance=self.new_balance,
+            transaction_type=self.transaction_type
+        )
+
+        session.add(record)
+
+        session.commit()
+
+        print(
+            f"Transaction saved: {self.player_name}, "
+            f"{self.amount}, "
+            f"Balance: {self.new_balance}"
+        )

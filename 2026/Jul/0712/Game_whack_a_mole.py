@@ -1,73 +1,138 @@
 import random
-from DB_database import *
+import time
+from colorama import init
+from DB_database import Whack_record, User_record
 
-def play_whack():
 
-    player = input("Player name: ")
+def whack_bet():
+
+    player_name = input("Enter player name: ")
+
+    pre_balance = User_record.get_latest_balance(player_name)
+
+    print(f"\nCurrent Balance: {pre_balance}")
+
+    if pre_balance <= 0:
+        print("❌ You don't have enough balance to play.")
+        return None
 
     while True:
         try:
-            bet = int(input("Bet amount: "))
+            bet_amount = int(input("Enter bet amount: "))
 
-            if bet <= 0:
+            if bet_amount <= 0:
                 print("Bet must be greater than 0.")
+                continue
+
+            if bet_amount > pre_balance:
+                print("❌ Bet exceeds your balance.")
                 continue
 
             break
 
         except ValueError:
-            print("Please enter a number.")
+            print("Enter a valid number.")
 
-    if bet <= 0:
-        print("Bet must be greater than 0.")
-        return
+    return player_name, bet_amount
 
-    pre_balance = User_record.get_latest_balance(player)
 
-    if bet > pre_balance:
-        print("Insufficient balance.")
-        return
+def play_whack_game():
+
+    holes = 5
+    rounds = 10
 
     hits = 0
     misses = 0
 
-    print("\n===== Whack-a-Mole =====")
-    print("A mole appears in a hole numbered 1-9.")
-    print("Type the correct number to whack it!\n")
+    print("\n🐹 Whack a Mole!")
+    print("Hit the mole by choosing the correct hole.")
 
-    for round_num in range(1, 11):
+    for i in range(rounds):
 
-        mole = random.randint(1, 9)
+        mole_position = random.randint(1, holes)
 
-        print(f"\nRound {round_num}")
-        print(f"Mole appears at hole {mole}")
+        print(f"\nRound {i + 1}/{rounds}")
+        print("Holes: 1 2 3 4 5")
 
-        answer = input("Whack: ")
+        try:
+            choice = int(input("Choose a hole: "))
 
-        if answer == str(mole):
-            print("Hit!")
-            hits += 1
-        else:
-            print("Miss!")
+        except ValueError:
+            print("Invalid choice. You missed!")
             misses += 1
+            continue
+
+
+        if choice == mole_position:
+            hits += 1
+            print("🔨 HIT!")
+
+        else:
+            misses += 1
+            print(f"❌ Miss! Mole was in hole {mole_position}")
+
+        time.sleep(0.5)
+
 
     score = hits * 10
 
-    if hits >= 7:
-        status = "Win"
-        win_amount = bet * 2
-    elif hits >= 5:
-        status = "Draw"
-        win_amount = 0
-    else:
-        status = "Lose"
-        win_amount = -bet
+    print("\n===== Game Result =====")
+    print(f"Hits: {hits}")
+    print(f"Misses: {misses}")
+    print(f"Score: {score}")
 
+    return hits, misses, score
+
+
+
+def calculate_reward(score, bet_amount):
+
+    if score >= 70:
+        win_amount = bet_amount * 2
+        status = "Win"
+
+    else:
+        win_amount = -bet_amount
+        status = "Lose"
+
+    return win_amount, status
+
+
+
+def play_whack():
+
+    init()
+
+    bet_info = whack_bet()
+
+    if bet_info is None:
+        return
+
+    player_name, bet_amount = bet_info
+
+
+    hits, misses, score = play_whack_game()
+
+
+    win_amount, status = calculate_reward(
+        score,
+        bet_amount
+    )
+
+
+    pre_balance = User_record.get_latest_balance(player_name)
     new_balance = pre_balance + win_amount
 
+
+    print(f"\n{player_name} {status}!")
+    print(f"Win Amount: {win_amount}")
+    print(f"Before Balance: {pre_balance}")
+    print(f"Current Balance: {new_balance}")
+
+
     Whack_record(
-        player,
-        bet,
+        player_name,
+        bet_amount,
         pre_balance,
         new_balance,
         hits,
@@ -77,18 +142,13 @@ def play_whack():
         status,
     ).add_info()
 
-    User_record(player, win_amount).update_balance()
 
-    print("\n===== Game Over =====")
-    print(f"Hits: {hits}")
-    print(f"Misses: {misses}")
-    print(f"Score: {score}")
-    print(f"Result: {status}")
-    print(f"Win Amount: {win_amount}")
-    print(f"Previous Balance: {pre_balance}")
-    print(f"New Balance: {new_balance}")
+    User_record(
+        player_name,
+        win_amount
+    ).update_balance()
 
-    session.close()
+
 
 if __name__ == "__main__":
     play_whack()

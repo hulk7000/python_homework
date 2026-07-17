@@ -103,3 +103,14 @@ class Whack_game(Base):
     win_amount = Column(Integer, nullable=False)
     status = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Money_transaction(Base):
+    __tablename__ = "money_transaction"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String(50), nullable=False)
+    amount = Column(Integer, nullable=False)
+    pre_balance = Column(Integer, nullable=False)
+    new_balance = Column(Integer, nullable=False)
+    transaction_type = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)

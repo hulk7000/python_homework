@@ -3,9 +3,6 @@ import random
 import sys
 from colorama import init
 from DB_database import Horse_record, User_record
-import json
-from datetime import datetime
-
 
 def generate_times(num, total=30):
 
@@ -80,6 +77,14 @@ def horse_bet(num_horses):
     """
     name = input("Enter player name: ")
 
+    pre_balance = User_record.get_latest_balance(name)
+
+    print(f"Current Balance: {pre_balance}")
+
+    if pre_balance <= 0:
+        print("❌ You don't have enough balance to play.")
+        return None
+
     while True:
         try:
             amount = int(input(f"{name}, enter your bet amount: "))
@@ -87,7 +92,13 @@ def horse_bet(num_horses):
             if amount <= 0:
                 print("The amount must be greater than 0. Please try again.")
                 continue
+
+            if amount > pre_balance:
+                print("❌ Bet exceeds your balance.")
+                continue
+
             break
+
         except ValueError:
             print("Please enter a valid numeric amount.")
 
@@ -102,7 +113,6 @@ def horse_bet(num_horses):
             print("Please enter a valid number.")
 
     return name, amount, choice
-
 
 def race_result(player_name, bet_amount, horse_choice, winner):
 
