@@ -114,3 +114,18 @@ class Money_transaction(Base):
     new_balance = Column(Integer, nullable=False)
     transaction_type = Column(String, nullable=False)
     created_time = Column(DateTime, default=datetime.now)
+
+class Wheel_game(Base):
+    __tablename__ = "wheel_game"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    bet_amount = Column(Integer, nullable=False)
+    pre_balance = Column(Integer, nullable=False)
+    new_balance = Column(Integer, nullable=False)
+    chosen_color = Column(String, nullable=False)
+    wheel_result = Column(String, nullable=False)
+    multiplier = Column(Float, nullable=False)
+    win_amount = Column(Integer, nullable=False)
+    status = Column(String, nullable=False)
+    created_time = Column(DateTime, default=datetime.now)

@@ -313,3 +313,31 @@ class Money_record:
             f"{self.amount}, "
             f"Balance: {self.new_balance}"
         )
+
+class Wheel_record:
+    def __init__(self, player_name, bet_amount, pre_balance, new_balance, chosen_color, wheel_result, multiplier, win_amount, status):
+        self.player_name = player_name
+        self.bet_amount = bet_amount
+        self.pre_balance = pre_balance
+        self.new_balance = new_balance
+        self.chosen_color = chosen_color
+        self.wheel_result = wheel_result
+        self.multiplier = multiplier
+        self.win_amount = win_amount
+        self.status = status
+
+    def add_info(self):
+        record = Wheel_game(
+            player_name=self.player_name,
+            bet_amount=self.bet_amount,
+            pre_balance=self.pre_balance,
+            new_balance=self.new_balance,
+            chosen_color=self.chosen_color,
+            wheel_result=self.wheel_result,
+            multiplier=self.multiplier,
+            win_amount=self.win_amount,
+            status=self.status,
+        )
+
+        session.add(record)
+        session.commit()
